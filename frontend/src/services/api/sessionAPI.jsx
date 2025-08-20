@@ -1,6 +1,6 @@
 import axios from "axios";
 
-// Base URL for API 
+// Base URL for API
 const appUrl = import.meta.env.VITE_API_URL || "http://localhost:5000";
 
 // Create Axios instance
@@ -50,7 +50,7 @@ const fetchSessionById = async (id) => {
   try {
     // console.log(id)
     const res = await api.get(`/sessions/my-sessions/${id}`);
-    console.log(res)
+    console.log(res);
     return { success: true, data: res.data.session };
   } catch (error) {
     return { success: false, error: handleError(error) };

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import SessionCard from "../../components/Card/SessionCard";
-import SesssionAPI from "../../services/api/sessionApi";
+import SesssionAPI from "../../services/api/sessionAPI";
 import Button from "../../components/Buttons/Button";
 
 const Dashboard = () => {

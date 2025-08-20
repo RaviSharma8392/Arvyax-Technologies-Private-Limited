@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Alert from "../../components/Alert/AlertMessage";
 import SessionCard from "../../components/Card/SessionCard";
-import SesssionAPI from "../../services/api/sessionApi";
+import SesssionAPI from "../../services/api/sessionAPI";
 
 const MySessions = () => {
   const navigate = useNavigate();

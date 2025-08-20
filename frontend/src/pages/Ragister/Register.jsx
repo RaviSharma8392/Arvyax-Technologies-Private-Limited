@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import authAPI from "../../services/api/authAPI.js";
+import authAPI from "../../services/api/authAPI";
 
 const Register = () => {
   const [email, setEmail] = useState("");
@@ -25,7 +25,7 @@ const Register = () => {
       setIsLoading(true);
 
       const registerData = { email, password };
-      const res = await authAPI.registerUser(registerData);
+      const res = await authAPIa.registerUser(registerData);
 
       if (res.success) {
         console.log("✅ Registration success:", res.data);
