@@ -83,8 +83,8 @@ const loginUser = async (req, res) => {
      // Send token in cookie
     res
       .cookie("token", token, {
-        httpOnly: true,  
-        secure: "development", // for  http use development and for https use production
+        httpOnly: false,  
+        secure: true, // for  http use development and for https use production
         sameSite: "strict", 
       })
       .json({
