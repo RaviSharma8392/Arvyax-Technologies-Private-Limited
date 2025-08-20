@@ -4,7 +4,7 @@ import SessionForm from "./SessionForm";
 import StatusBadge from "../../../components/Status/StatusBadge";
 import Alert from "../../../components/Alert/AlertMessage";
 import SaveStatusIndicator from "../SessionEditor/SaveStatusIndicator";
-import SessionAPI from "../../../services/api/sessionApi";
+import SessionAPI from "../../../services/api/sessionAPI";
 import AutoSaveNotice from "./AutoSaveNotice";
 
 const SessionEditor = () => {

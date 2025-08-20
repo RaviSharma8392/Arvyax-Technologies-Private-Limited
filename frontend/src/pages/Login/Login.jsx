@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import authAPI from "../../services/api/'authAPI.js";
+import authAPI from "../../services/api/authAPI.js";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -25,9 +25,7 @@ const Login = () => {
       const res = await authAPI.loginUser(loginDetails);
 
       if (res.success) {
-        console.log("✅ Login success:", res.data);
         localStorage.setItem("currentUser", JSON.stringify(res.data.user));
-
         navigate("/dashboard");
       } else {
         setError(res.error || "Login failed. Please try again.");

@@ -7,11 +7,9 @@ const api = axios.create({
   withCredentials: true,
 });
 
-// helper function for handeling error
 const handleError = (error) => error.response?.data || error.message;
 
-// ragisterUser
- const registerUser = async (registerData) => {
+const registerUser = async (registerData) => {
   try {
     const res = await api.post("/users/register", registerData);
     return { success: true, data: res.data };
@@ -20,8 +18,7 @@ const handleError = (error) => error.response?.data || error.message;
   }
 };
 
-// logionUser
- const loginUser = async (loginData) => {
+const loginUser = async (loginData) => {
   try {
     const res = await api.post("/users/login", loginData);
     return { success: true, data: res.data };
@@ -30,8 +27,7 @@ const handleError = (error) => error.response?.data || error.message;
   }
 };
 
-// logoutUser
- const logoutUser = async () => {
+const logoutUser = async () => {
   try {
     const res = await api.post("/users/logout");
     return { success: true, data: res.data };
