@@ -81,20 +81,20 @@ const loginUser = async (req, res) => {
     const token = jwt.sign({ id: user._id }, JWT_SECRET);
 
      // Send token in cookie
-    res
-      .cookie("token", token, {
-        httpOnly: true,  
-        secure: true, // for  http use development and for https use production
-        sameSite: "strict", 
-      })
-      .json({
-        message: "Login successful",
-        user:{email:user.email,
-          user_id:user._id
+   res
+  .cookie("token", token, {
+    httpOnly: true,
+    secure: true,  // true for production (HTTPS)
+    sameSite: "strict",
+  })
+  .json({
+    message: "Login successful",
+    user: {
+      email: user.email,
+      user_id: user._id
+    }
+  });
 
-         }
-       
-      });
 
   } catch (error) {
     // console.error("Error in login:", error);
