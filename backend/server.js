@@ -9,7 +9,7 @@ const app = express();
 // Enable cross-origin requests from frontend.
 app.use(
   cors({
-    origin: config.serverConfig.cors_origin, 
+    origin: "https://arvyax-wellness-platform.netlify.app"||config.serverConfig.cors_origin, 
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
   })

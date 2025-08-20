@@ -81,12 +81,11 @@ const loginUser = async (req, res) => {
     const token = jwt.sign({ id: user._id }, JWT_SECRET);
 
      // Send token in cookie
-   res
-  .cookie("token", token, {
-    httpOnly: true,
-    secure: true,  // true for production (HTTPS)
-    sameSite: "strict",
-  })
+  res.cookie("token", token, {
+  httpOnly: true,
+  secure: true,       // required for HTTPS
+  sameSite: "none"    // cross-site cookie must be 'none'
+})
   .json({
     message: "Login successful",
     user: {
