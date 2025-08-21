@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import authAPI from "../../services/api/authAPI";
 
@@ -9,6 +9,14 @@ const Login = () => {
   const [error, setError] = useState("");
 
   const navigate = useNavigate();
+  const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+
+  // Auto redirect if user is already logged in
+  useEffect(() => {
+    if (currentUser?.user_id) {
+      navigate("/dashboard", { replace: true });
+    }
+  }, [currentUser, navigate]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -26,7 +34,7 @@ const Login = () => {
 
       if (res.success) {
         localStorage.setItem("currentUser", JSON.stringify(res.data.user));
-        navigate("/dashboard");
+        navigate("/dashboard", { replace: true });
       } else {
         setError(res.error || "Login failed. Please try again.");
       }
@@ -59,6 +67,7 @@ const Login = () => {
         )}
 
         <form className="mt-6 space-y-5" onSubmit={handleSubmit}>
+          {/* Email */}
           <div>
             <label
               htmlFor="email"
@@ -76,6 +85,7 @@ const Login = () => {
             />
           </div>
 
+          {/* Password */}
           <div>
             <label
               htmlFor="password"
@@ -93,6 +103,7 @@ const Login = () => {
             />
           </div>
 
+          {/* Remember & Forgot */}
           <div className="flex items-center justify-between text-sm">
             <label className="flex items-center">
               <input
@@ -108,6 +119,7 @@ const Login = () => {
             </a>
           </div>
 
+          {/* Submit */}
           <button
             type="submit"
             disabled={isLoading}

@@ -1,6 +1,5 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import authAPI from "../../services/api/authAPI";
 
 const Register = () => {
   const [email, setEmail] = useState("");
@@ -10,6 +9,14 @@ const Register = () => {
   const [error, setError] = useState("");
 
   const navigate = useNavigate();
+  const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+
+  // Auto redirect if user is already logged in
+  useEffect(() => {
+    if (currentUser?.user_id) {
+      navigate("/dashboard", { replace: true });
+    }
+  }, [currentUser, navigate]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
