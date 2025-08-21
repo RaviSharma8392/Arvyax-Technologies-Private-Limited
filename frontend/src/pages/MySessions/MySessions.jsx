@@ -30,6 +30,20 @@ const MySessions = () => {
     loadSessions();
   }, []);
 
+  // delete function
+  const handleDelete = async (id) => {
+    if (!window.confirm("Are you sure you want to delete this session?"))
+      return;
+
+    const response = await SesssionAPI.deleteSession(id);
+    if (response.success) {
+      setSessions((prev) => prev.filter((s) => s._id !== id));
+      alert("Session deleted successfully");
+    } else {
+      alert("Failed to delete session: " + response.error);
+    }
+  };
+
   return (
     <div className="min-h-screen bg-gray-50 py-10 px-4 sm:px-6 lg:px-8">
       <div className="max-w-6xl mx-auto">
@@ -90,7 +104,7 @@ const MySessions = () => {
         ) : (
           /* Sessions grid */
           <div className="overflow-hidden sm:rounded-lg">
-            <SessionCard data={sessions} />
+            <SessionCard data={sessions} onDelete={handleDelete} />
           </div>
         )}
       </div>

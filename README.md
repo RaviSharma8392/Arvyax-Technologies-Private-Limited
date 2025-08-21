@@ -37,7 +37,9 @@ Backend Setup
 cd backend npm install
 
 Create .env file
-PORT=5000 MONGO_URI=your_mongodb_connection_string JWT_SECRET=your_super_secret_jwt_key CORS_ORIGIN=http://localhost:5173
+PORT=5000 MONGO_URI=your_mongodb_connection_string
+JWT_SECRET=your_super_secret_jwt_key
+sCORS_ORIGIN=http://localhost:5173
 
 Start development server
 npm run dev
@@ -57,6 +59,7 @@ Frontend: http://localhost:5173
 Backend API: http://localhost:5000
 
 📂 Project Structure: Arvyax Wellness Platform
+
 arvyax-wellness-platform/ ├── backend/
 
 │ ├── src/
@@ -99,7 +102,7 @@ arvyax-wellness-platform/ ├── backend/
 
 🗄️ Database Schema
 
-User Model { _id: ObjectId, // MongoDB automatically generates this unique identifier
+User Model { \_id: ObjectId, // MongoDB automatically generates this unique identifier
 
 email: String, // User's email address (unique, required)
 
@@ -111,7 +114,7 @@ created_at: Date // Timestamp of when the user was created
 
 Session Model
 
-{ _id: ObjectId, // MongoDB automatically generates this unique identifier
+{ \_id: ObjectId, // MongoDB automatically generates this unique identifier
 
 user_id: ObjectId, // Reference to the user who created this session
 
@@ -127,11 +130,15 @@ created_at: Date, // Timestamp of when the session was created
 
 updated_at: Date // Timestamp of when the session was last updated }
 
-🔌 API Endpoints Authentication POST /api/users/register - Register a new user
+🔌 API Endpoints Authentication
+
+POST /api/users/register - Register a new user
 
 POST /api/users/login - Login user
 
-Sessions GET /api/sessions - Get all public sessions
+Sessions
+
+GET /api/sessions - Get all public sessions
 
 GET /api/sessions/my-sessions - Get user's sessions (requires auth)
 
