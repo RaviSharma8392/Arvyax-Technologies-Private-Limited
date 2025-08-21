@@ -1,7 +1,8 @@
 import React from "react";
 import Button from "../Buttons/Button";
+import PrimaryButton from "../Buttons/PrimaryButton";
 
-const SessionCard = ({ data }) => {
+const SessionCard = ({ data, onDelete }) => {
   // console.log(data);
   const currentUser = JSON.parse(localStorage.getItem("currentUser"));
   return (
@@ -99,13 +100,23 @@ const SessionCard = ({ data }) => {
               </svg>
               Updated {new Date(session.updatedAt).toLocaleDateString()}
             </div>
-            {session.user_id === currentUser?.user_id && (
-              <Button
-                to={`/dashboard/sessions/edit/${session._id}`}
-                variant="primary">
-                Edit
-              </Button>
-            )}
+            <div className="flex gap-3.5">
+              {session.user_id === currentUser?.user_id && (
+                <Button
+                  to={`/dashboard/sessions/edit/${session._id}`}
+                  variant="primary">
+                  Edit
+                </Button>
+              )}
+              {/* delete button */}
+              {session.user_id === currentUser?.user_id && (
+                <PrimaryButton
+                  onClick={() => onDelete(session._id)}
+                  label="Delete"
+                  variant="danger"
+                />
+              )}
+            </div>
           </div>
         </div>
       ))}

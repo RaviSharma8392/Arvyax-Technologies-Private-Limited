@@ -128,8 +128,33 @@ const publishSession = async (req, res) => {
     res.status(status.StatusCodes.INTERNAL_SERVER_ERROR).json({ error: "Server error" });
   }
 };
+// Delete a session (user-owned)
+const deleteSession = async (req, res) => {
+  try {
+    const { id } = req.params;
 
-module.exports = {
+    // Find the session and ensure it belongs to the logged-in user
+    const session = await Session.findOne({ _id: id, user_id: req.user.id });
+    if (!session) {
+      return res
+        .status(status.StatusCodes.NOT_FOUND)
+        .json({ success: false, error: "Session not found or unauthorized" });
+    }
+
+    await Session.deleteOne({ _id: id });
+    return res
+      .status(status.StatusCodes.OK)
+      .json({ success: true, message: "Session deleted successfully" });
+  } catch (error) {
+    // console.error("Error deleting session:", error);
+    return res
+      .status(status.StatusCodes.INTERNAL_SERVER_ERROR)
+      .json({ success: false, error: "Server error" });
+  }
+};
+
+
+module.exports = {deleteSession,
   getPublicSessions,
   getUserSessions,
   getUserSessionById,

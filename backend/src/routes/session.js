@@ -5,6 +5,7 @@ const {
   getUserSessionById,
   saveDraftSession,
   publishSession,
+  deleteSession,
 } = require("../controllers/sessionController");
 const authMiddleware = require("../middlewares/authMiddleware");
 
@@ -24,5 +25,9 @@ sessionRouter.post("/my-sessions/save-draft", saveDraftSession);
 
 // Publish a session
 sessionRouter.post("/my-sessions/publish", publishSession);
+
+// delete a session
+sessionRouter.delete("/my-sessions/delete/:id", deleteSession);
+
 
 module.exports = sessionRouter;

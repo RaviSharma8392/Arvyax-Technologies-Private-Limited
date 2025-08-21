@@ -67,8 +67,20 @@ const fetchAllSession = async () => {
   }
 };
 
+// Delete session by ID
+const deleteSession = async (id) => {
+  try {
+    const res = await api.delete(`/sessions/my-sessions/delete/${id}`);
+    return { success: true, data: res.data };
+  } catch (error) {
+    return { success: false, error: handleError(error) };
+  }
+};
+
 // Export all API functions
 const SesssionAPI = {
+  deleteSession,
+
   saveDraft,
   publishSession,
   fetchSession,

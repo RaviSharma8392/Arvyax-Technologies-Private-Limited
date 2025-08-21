@@ -8,6 +8,19 @@ const Dashboard = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
+  const handleDelete = async (id) => {
+    if (!window.confirm("Are you sure you want to delete this session?"))
+      return;
+
+    const response = await SesssionAPI.deleteSession(id);
+    if (response.success) {
+      setSessions((prev) => prev.filter((s) => s._id !== id));
+      alert("Session deleted successfully");
+    } else {
+      alert("Failed to delete session: " + response.error);
+    }
+  };
+
   // fetchSessions function
   const fetchSessions = async () => {
     try {
@@ -122,7 +135,7 @@ const Dashboard = () => {
         </div>
       ) : (
         <div className="overflow-hidden sm:rounded-md">
-          <SessionCard data={sessions} />
+          <SessionCard data={sessions} onDelete={handleDelete} />
         </div>
       )}
     </div>
