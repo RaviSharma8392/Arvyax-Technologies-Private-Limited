@@ -7,13 +7,22 @@ const cors = require("cors");
 const app = express();
 
 // Enable cross-origin requests from frontend.
-app.use(
-  cors({
-    origin: "https://arvyax-wellness-platform.netlify.app", 
-    methods: ["GET", "POST", "PUT", "DELETE"],
-    credentials: true,
-  })
-);
+app.use(cors({
+  origin: (origin, callback) => {
+    const allowedOrigins = [
+      "https://arvyax-wellness-platform.netlify.app",
+      "http://localhost:5173"
+    ];
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  credentials: true,
+}));
+
 
 // GLOBAL MIDDLEWARES
 
